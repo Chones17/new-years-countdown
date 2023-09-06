@@ -15,7 +15,6 @@ export default function TimeZoneDisplay(): JSX.Element {
         'Australia/Sydney'
     ];
 
-    const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0);
 
     const timeZoneChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedTimeZone(event.target.value);
@@ -24,6 +23,7 @@ export default function TimeZoneDisplay(): JSX.Element {
     useEffect(() => {
         const updateCountdown = () => {
             if (selectedTimeZone) {
+                const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0);
                 const currentDate = new Date();
                 
                 // Calculate time until New Year's
