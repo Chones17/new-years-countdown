@@ -1,11 +1,17 @@
-'use client';
+'use client'
 import React, { ChangeEvent, useState, useEffect } from 'react'
+
+function TimeTest(timeZone: string): string {
+    const date: Date = new Date()
+    const time: string = new Intl.DateTimeFormat('en-US', {timeStyle: 'medium', timeZone: timeZone}).format(date)
+    return (time)
+}
 
 export default function TimeZoneDisplay(): JSX.Element {
     
     // Set the states for time zone and New Year countdown
-    const [selectedTimeZone, setSelectedTimeZone] = useState<string>('');
-    const [newYearCountdown, setNewYearCountdown] = useState<string>('');
+    const [selectedTimeZone, setSelectedTimeZone] = useState<string>('')
+    const [newYearCountdown, setNewYearCountdown] = useState<string>('')
 
     const timeZones: string[] = [
         'America/Denver',
@@ -15,16 +21,15 @@ export default function TimeZoneDisplay(): JSX.Element {
         'Australia/Sydney'
     ];
 
-
     const timeZoneChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedTimeZone(event.target.value);
+        setSelectedTimeZone(event.target.value)
     };
 
     useEffect(() => {
         const updateCountdown = () => {
             if (selectedTimeZone) {
-                const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0);
-                const currentDate = new Date();
+                const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0)
+                const currentDate = new Date()
                 
                 // Calculate time until New Year's
                 const timeDifference = newYearDate.getTime() - currentDate.getTime();
@@ -33,7 +38,7 @@ export default function TimeZoneDisplay(): JSX.Element {
                 const minutesUntilNewYear = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
                 const secondsUntilNewYear = Math.floor((timeDifference % (1000 * 60)) / 1000);
         
-                const countdownString = `${daysUntilNewYear}d ${hoursUntilNewYear}h ${minutesUntilNewYear}m ${secondsUntilNewYear}s`;
+                const countdownString = `${daysUntilNewYear} days ${hoursUntilNewYear} hours ${minutesUntilNewYear} minutes ${secondsUntilNewYear} seconds`;
         
                 setNewYearCountdown(countdownString);
             } else {
@@ -48,13 +53,15 @@ export default function TimeZoneDisplay(): JSX.Element {
 
     return (
         <div>
-            <h2>America/Denver</h2>
-            <h2>Asia/Kolkata</h2>
+            <h2>{timeZones[0]}</h2>
+            <p>{TimeTest(timeZones[0])}</p>
+            <h2>{timeZones[1]}</h2>
+            <p>{TimeTest(timeZones[1])}</p>
             <select value={selectedTimeZone} onChange={timeZoneChange}>
                 <option value="">--</option>
                 {timeZones.map((zone) => (
                     <option key={zone} value={zone}>{zone}</option>
-                ))}
+               ))}
             </select>
             <h2>New Year's Countdown</h2>
             <p>{newYearCountdown}</p>
