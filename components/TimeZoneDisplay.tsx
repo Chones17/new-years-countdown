@@ -63,7 +63,7 @@ export default function TimeZoneDisplay(): JSX.Element {
                     <option key={zone} value={zone}>{zone}</option>
                ))}
             </select>
-            <h2>New Year's Countdown</h2>
+            <h2>New Years Countdown</h2>
             <p>{newYearCountdown}</p>
         </div>
     );
