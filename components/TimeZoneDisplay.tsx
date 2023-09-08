@@ -24,7 +24,7 @@ export default function TimeZoneDisplay(): JSX.Element {
 
     useEffect(() => {
         const updateTime = () => {
-            const newYearDate = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0, 0)
+            const newYearDate = new Date(new Date().getFullYear() + 1, 0, 0, 23, 0, 0, 0)
             const currentDate = new Date()
             const firstTime: string = new Intl.DateTimeFormat('en-US', {timeStyle: 'medium', timeZone: 'America/Denver'}).format(currentDate)
             const secondTime: string = new Intl.DateTimeFormat('en-US', {timeStyle: 'medium', timeZone: 'Asia/Kolkata'}).format(currentDate)
